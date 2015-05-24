@@ -21,44 +21,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//Routing email
-var smtpTransport = nodemailer.createTransport("SMTP",{
-	service: "Gmail",
-		auth: {
-		user: "trentdensley@gmail.com",
-		pass: "Riverton19"
-		}
-});
-
-app.post('/postEmail', function(req, res) {
-	//nodemailer logic
-
-	
-})
-
-app.get('/public/pages/contact.html',function(req,res){
-	res.sendfile('forms.html');
-});
-
-app.get('/send',function(req,res){
-		
-	var mailOptions={
-		to : req.query.to,
-		subject : req.query.subject,
-		text : req.query.text
-	}
-	console.log(mailOptions);
-	smtpTransport.sendMail(mailOptions, function(error, response){
-		if(error){
-			console.log(error);
-			res.end("error");
-		}else{
-			console.log("Message sent: " + response.message);
-			res.end("sent");
-		 }
-	});
-});
-
 app.listen(9898, function(){
 console.log("Express Started on Port 9898");
 });
